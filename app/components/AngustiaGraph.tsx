@@ -1,20 +1,24 @@
 "use client";
 import React, { useState } from "react";
-import { useAngustiaService } from "../hooks/useAngustiaService";
+import { useAngustiaData } from "../hooks/useAngustiaData";
+import { useAngustiaVisualization } from "../hooks/useAngustiaVisualization";
+
 
 interface AngustiaGraphProps {
   sintomas: string[];
 }
 
 const AngustiaGraph: React.FC<AngustiaGraphProps> = ({ sintomas }) => {
-  const { registrar, exportarRegistros, pontos, normalizarY } = useAngustiaService();
+  const { salvarRegistro, exportarRegistros } = useAngustiaData();
+  const { pontos, normalizarY } = useAngustiaVisualization();
+
   const [intensidade, setIntensidade] = useState(0);
   const [dificuldade, setDificuldade] = useState(0);
   const [contexto, setContexto] = useState("");
   const [popup, setPopup] = useState<{ id: string; x: number; y: number } | null>(null);
 
   const handleRegistrarSensacao = () => {
-    registrar(intensidade, contexto, sintomas, dificuldade); // ✅ Agora compatível com a função corrigida
+    salvarRegistro(intensidade, contexto, sintomas);
     setContexto("");
   };
 
