@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { IAngustiaService } from "../services/IAngustiaService";
 import { useAngustiaService } from "../hooks/useAngustiaService";
 
 interface AngustiaGraphProps {
