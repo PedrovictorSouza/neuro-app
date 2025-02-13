@@ -1,27 +1,27 @@
 "use client";
 import React, { useState } from "react";
-import useAngustiaGraph from "./useAngustiaGraph";
-import useAngustiaStorage from "./useAngustiaStorage";
+import { IAngustiaService } from "../services/IAngustiaService";
+import { useAngustiaService } from "../hooks/useAngustiaService";
 
 interface AngustiaGraphProps {
   sintomas: string[];
 }
 
 const AngustiaGraph: React.FC<AngustiaGraphProps> = ({ sintomas }) => {
-  const { pontos, adicionarPonto, normalizarY } = useAngustiaGraph();
-  const { salvarRegistro, exportarRegistros } = useAngustiaStorage();
+  const { registrar, exportarRegistros, pontos, normalizarY } = useAngustiaService();
   const [intensidade, setIntensidade] = useState(0);
   const [dificuldade, setDificuldade] = useState(0);
   const [contexto, setContexto] = useState("");
   const [popup, setPopup] = useState<{ id: string; x: number; y: number } | null>(null);
 
   const handleRegistrarSensacao = () => {
-    salvarRegistro(intensidade, contexto, sintomas);
-    adicionarPonto(intensidade, dificuldade);
+    registrar(intensidade, contexto, sintomas, dificuldade); // ✅ Agora compatível com a função corrigida
     setContexto("");
   };
 
-  const explicacoes = {
+
+
+  const explicacoes: Record<string, string> = {
     inibicao: "A inibição ocorre quando há uma dificuldade em agir, mesmo com uma sensação presente. Pode estar ligada a bloqueios emocionais ou repressão.",
     sintoma: "O sintoma representa uma manifestação perceptível de um conflito interno, como ansiedade, tremores ou mal-estar, sem necessariamente uma dificuldade de agir.",
     zonaNeutra: "A zona neutra representa um estado de estabilidade, onde não há grande intensidade de sensação nem dificuldade de agir.",
