@@ -12,11 +12,18 @@ const useAngustiaGraph = () => {
 
   // Adiciona um novo ponto no gráfico com a dificuldade percebida
   const adicionarPonto = (y: number, dificuldade: number) => {
-    if (xAtual > 31) return;
-
-    setPontos((prevPontos) => [...prevPontos, { x: xAtual, y, dificuldade }]); 
-    setXAtual(xAtual + 1);
+    if (xAtual > 31) return; // Se já atingiu o limite, não adiciona mais pontos
+  
+    setPontos((prevPontos) => [...prevPontos, { x: xAtual, y, dificuldade }]);
+  
+    setXAtual((prevX) => {
+      console.log("Atualizando X:", prevX + 1); // Verifica se X está aumentando corretamente
+      return prevX + 1;
+    });
+  
+    console.log("Ponto adicionado:", { x: xAtual, y, dificuldade });
   };
+  
 
   return { pontos, adicionarPonto, normalizarY };
 };

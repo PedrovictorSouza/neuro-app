@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gradient-start: #344063;
+  --gradient-end: #121313;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gradient-start: #111827;
+    --gradient-end: #1e40af;
   }
 }
 
@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+@layer utilities {
+  .bg-app-gradient {
+    background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+  }
+}
+

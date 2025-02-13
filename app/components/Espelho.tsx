@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useSujeito } from "../context/SujeitoContext";
+import { SujeitoActions } from "../services/SujeitoActions";
 
 const Espelho = () => {
   const { registrarAcao, estadoAngustia } = useSujeito();
@@ -22,8 +23,8 @@ const Espelho = () => {
   return (
     <div
       className="p-8 bg-gray-300 rounded-lg shadow-md text-center"
-      onMouseEnter={() => registrarAcao("evitou_espelho")}
-      onClick={() => registrarAcao("fixou_no_outro")}
+      onMouseEnter={() => registrarAcao(SujeitoActions.evitarEspelho())}
+      onClick={() => registrarAcao(SujeitoActions.fixarNoOutro())}
     >
       <h2 className="text-lg font-semibold">🪞 Espelho Enigmático</h2>
       <p className="text-4xl mt-2">{reflexo || " "}</p>
